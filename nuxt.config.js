@@ -47,8 +47,45 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/auth'
   ],
+  /*
+   ** Auth module configuration
+   ** See https://auth.nuxtjs.org/api/options.html
+   */
+  auth: {
+    strategies: {
+      facebook: {
+        // donot add clientsecret/faceboooksecret anywhere as it will be visible on client side and will invite unwanted attention
+        client_id: 'Enter your facebook clientid here',
+        userinfo_endpoint:
+          'https://graph.facebook.com/v2.12/me?fields=about,name,picture{url},email,birthday',
+        scope: ['public_profile', 'email', 'user_birthday']
+      },
+      google: {
+        client_id: 'Enter your googlr clientid here'
+      }
+    },
+    redirect: {
+      login: '/registration',
+      logout: '/registration',
+      callback: '/registration',
+      home: '/'
+    },
+    /*
+     ** pluugins to extend the auth module
+     ** See https://auth.nuxtjs.org/recipes/extend.html
+     */
+    plugins: ['~/plugins/extendauth.js']
+  },
+  /*
+   ** Router configuration
+   ** See https://nuxtjs.org/api/configuration-router
+   */
+  router: {
+    middleware: ['auth']
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -61,7 +98,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
