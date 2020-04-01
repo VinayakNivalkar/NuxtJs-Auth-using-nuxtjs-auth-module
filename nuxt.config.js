@@ -60,11 +60,11 @@ export default {
         // donot add clientsecret/faceboooksecret anywhere as it will be visible on client side and will invite unwanted attention
         client_id: 'Enter your facebook clientid here',
         userinfo_endpoint:
-          'https://graph.facebook.com/v2.12/me?fields=about,name,picture{url},email,birthday',
+          'https://graph.facebook.com/me?fields=about,name,picture.typr(large){url},email,birthday',
         scope: ['public_profile', 'email', 'user_birthday']
       },
       google: {
-        client_id: 'Enter your googlr clientid here'
+        client_id: 'Enter your google clientid here'
       }
     },
     redirect: {
